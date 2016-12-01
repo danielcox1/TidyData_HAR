@@ -29,16 +29,16 @@ The subject information, activity information, and measured data for both traini
 
 ### 2.2 Column Descriptions
 1. RecordID
-* Data were collected at 50 Hz. This column contains an index of the temporal dimension of the data.
-* Values span from 1 to 409, and restart at 1 for each participant
+ * Data were collected at 50 Hz. This column contains an index of the temporal dimension of the data.
+ * Values span from 1 to 409, and restart at 1 for each participant
 
 2. SubjectID
-* Each participant was assigned a unique number.
-* Values span from 1 to 30
+ * Each participant was assigned a unique number.
+ * Values span from 1 to 30
 
 3. ActivityName
-* The activity that was being performed.
-* Values can be:
+ * The activity that was being performed.
+ * Values can be:
     * WALKING
     * WALKING_UPSTAIRS
     * WALKING_DOWNSTAIRS
@@ -47,20 +47,20 @@ The subject information, activity information, and measured data for both traini
     * LAYING
 
 4. DataSet
-* Subjects were randomly grouped into a "Training" group and a "Test" group.
-* Values can be:
+ * Subjects were randomly grouped into a "Training" group and a "Test" group.
+ * Values can be:
     * Training
     * Test
 
 5. Domain
-* Specifies the domain of the measurements.
-* Values can be:
+ * Specifies the domain of the measurements.
+ * Values can be:
     * Time
     * Frequency
 
 6. Feature
-* The type of measurement of the row. See background section for more details.
-* Values can be:
+ * The type of measurement of the row. See background section for more details.
+ * Values can be:
     * fBodyAcc
     * fBodyAccJerk
     * fBodyAccMag
@@ -79,18 +79,18 @@ The subject information, activity information, and measured data for both traini
     * tGravityAccMag
 
 7. Axis
-* The axis of measurement.
-* Values can be:
+ * The axis of measurement.
+ * Values can be:
     * X
     * Y
     * Z
     * NA
 
 8. Mean
-* The normalized mean value of the signal.
+ * The normalized mean value of the signal.
 
 9. Std
-* The normalized standard deviation of the signal.
+ * The normalized standard deviation of the signal.
 
 
 ## 3. Summary Data Set
@@ -101,12 +101,12 @@ The subject information, activity information, and measured data for both traini
 
 ### 3.2 Column Descriptions
 1. SubjectID
-* Each participant was assigned a unique number.
-* Values span from 1 to 30
+ * Each participant was assigned a unique number.
+ * Values span from 1 to 30
 
 2. ActivityName
-* The activity that was being performed.
-* Values can be:
+ * The activity that was being performed.
+ * Values can be:
     * WALKING
     * WALKING_UPSTAIRS
     * WALKING_DOWNSTAIRS
@@ -115,14 +115,14 @@ The subject information, activity information, and measured data for both traini
     * LAYING
 
 3. Domain
-* Specifies the domain of the measurements.
-* Values can be:
-** Time
-** Frequency
+ * Specifies the domain of the measurements.
+ * Values can be:
+    * Time
+    * Frequency
 
 4. Feature
-* The type of measurement of the row. See background section for more details.
-* Values can be:
+ * The type of measurement of the row. See background section for more details.
+ * Values can be:
     * fBodyAcc
     * fBodyAccJerk
     * fBodyAccMag
@@ -141,16 +141,16 @@ The subject information, activity information, and measured data for both traini
     * tGravityAccMag
 
 5. Axis
-* The axis of measurement.
-* Values can be:
+ * The axis of measurement.
+ * Values can be:
     * X
     * Y
     * Z
     * NA
 
 6. Mean
-* The normalized mean value of the signal.
+ * The normalized mean value of the signal.
 
 7. Std
-* The normalized standard deviation of the signal.
+ * The normalized standard deviation of the signal.
 
