@@ -39,25 +39,6 @@ setkey(train_data, 'ActivityID')
 train_data[activity_labels, ActivityName := ActivityName, by=.EACHI]
 train_data[, ActivityID := NULL]
 
-# melt so that there is only one observation per row and split up the feature column to its components
-train_data_melt <- melt(train_data, id.vars=c('RecordID', 'SubjectID', 'ActivityName', 'DataSet'))
-train_data_melt[, Domain := substr(variable, 1, 1)]
-train_data_melt[Domain == 't', Domain := 'time']
-train_data_melt[Domain == 'f', Domain := 'frequency']
-train_data_melt[, Feature := sapply(str_split(train_data_melt$variable, '-'), function(x){x[1]})]
-train_data_melt[, Measurement := sapply(str_split(train_data_melt$variable, '-'), function(x){x[2]})]
-train_data_melt[, Measurement := gsub('\\(\\)', '', Measurement)]
-train_data_melt[, Axis := sapply(str_split(train_data_melt$variable, '-'), function(x){x[3]})]
-train_data_melt[, variable := NULL]
-
-# merge with self to get one observation of mean and std per row
-train_data_tidy <- merge(train_data_melt[Measurement=='mean'], 
-                         train_data_melt[Measurement=='std'],
-                         by=c('RecordID', 'SubjectID', 'ActivityName', 'DataSet', 'Domain', 'Feature', 'Axis'))
-setnames(train_data_tidy, old=c('value.x', 'value.y'), new=c('Mean', 'Std'))
-train_data_tidy[,Measurement.x := NULL]
-train_data_tidy[,Measurement.y := NULL]
-
 
 
 ### Test Data
@@ -88,31 +69,11 @@ setkey(test_data, 'ActivityID')
 test_data[activity_labels, ActivityName := ActivityName, by=.EACHI]
 test_data[,ActivityID := NULL]
 
-# melt so that there is only one observation per row and split up the feature column to its components
-test_data_melt <- melt(test_data, id.vars=c('RecordID', 'SubjectID', 'ActivityName', 'DataSet'))
-test_data_melt[, Domain := substr(variable, 1, 1)]
-test_data_melt[Domain == 't', Domain := 'time']
-train_data_melt[Domain == 'f', Domain := 'frequency']
-test_data_melt[, Feature := sapply(str_split(test_data_melt$variable, '-'), function(x){x[1]})]
-test_data_melt[, Measurement := sapply(str_split(test_data_melt$variable, '-'), function(x){x[2]})]
-test_data_melt[, Measurement := gsub('\\(\\)', '', Measurement)]
-test_data_melt[, Axis := sapply(str_split(test_data_melt$variable, '-'), function(x){x[3]})]
-test_data_melt[is.na(Axis), Axis := 'NA']
-test_data_melt[, variable := NULL]
-
-# merge with self to get one observation of mean and std per row
-test_data_tidy <- merge(test_data_melt[Measurement=='mean'], 
-                        test_data_melt[Measurement=='std'],
-                        by=c('RecordID', 'SubjectID', 'ActivityName', 'DataSet', 'Domain', 'Feature', 'Axis'))
-setnames(test_data_tidy, old=c('value.x', 'value.y'), new=c('Mean', 'Std'))
-test_data_tidy[,Measurement.x := NULL]
-test_data_tidy[,Measurement.y := NULL]
-
 
 ### Join test and training data sets and save
-tidy_data <- rbind(train_data_tidy, test_data_tidy)
+tidy_data <- rbind(train_data, test_data)
 write.table(tidy_data, 'combined.txt', row.name=FALSE)
 
 ### Compute averages and save
-averages <- tidy_data[, .(AverageMean=mean(Mean), AverageStd=mean(Std)), by=.(SubjectID, ActivityName, Domain, Feature, Axis)]
+averages <- tidy_data[, lapply(.SD, mean), by=.(SubjectID, ActivityName), .SDcols=names(tidy_data)[1:66]]
 write.table(averages, 'averages.txt', row.name=FALSE)

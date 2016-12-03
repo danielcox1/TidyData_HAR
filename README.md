@@ -12,6 +12,8 @@ After these prerequisites are met, run the script by sourcing run_analysis.R. If
 
 The data contained in these files are described in CodeBook.md.
 
+A note to student reviewers: the README file is *not* where the code is described line by line. If the code requires that, a separate file should be supplied for that. The README file should instead describe in general how the scripts work and how they are connected. Again, the README file is *not* a line by line description of how the **analysis** works; it is a description of how the **scripts** are run.
+
 ### References
 [1] Davide Anguita, Alessandro Ghio, Luca Oneto, Xavier Parra and Jorge L. Reyes-Ortiz. Human Activity Recognition on Smartphones using a Multiclass Hardware-Friendly Support Vector Machine. International Workshop of Ambient Assisted Living (IWAAL 2012). Vitoria-Gasteiz, Spain. Dec 2012
 
